@@ -285,14 +285,15 @@ try {
     }
   
 }
-var overCircle = function(d) {
+function overCircle(d) {
   selectedNode = d;
+  console.log("MUKESH");
   updateTempConnector();
-};
-var outCircle = function(d) {
+}
+function outCircle(d) {
   selectedNode = null;
   updateTempConnector();
-};
+}
 
 //UPDATE FUNCTION START
 function update(source) {
@@ -357,15 +358,15 @@ node = svgGroup.selectAll("g.node")
     // phantom node to give us mouseover in a radius around it
     nodeEnter.append("circle")
         .attr('class', 'ghostCircle')
-        .attr("r", 30)
-        .attr("opacity", 0.2) // change this to zero to hide the target area
+        .attr("r", 10)
+        .attr("opacity", 0.5) // change this to zero to hide the target area
     .style("fill", "red")
         .attr('pointer-events', 'mouseover')
-        .on("mouseover", function(node) {
-            overCircle(node);
+        .on("mouseover", function(d) {
+            overCircle(d);
         })
-        .on("mouseout", function(node) {
-            outCircle(node);
+        .on("mouseout", function(d) {
+            outCircle(d);
         });
 
     // Update the text to reflect whether node has children or not.
