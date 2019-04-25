@@ -1,19 +1,23 @@
 import React, { Component } from "react";
-import Dtree from "./Dtree";
+import Tree from "./dndtree";
 
 class App extends Component {
-    constructor(props){
-        super(props);
+    constructor(){
+        super();
         this.state ={
-            change : false
+            treeData :[],
+            change : false,
+            isLoading :true
         };
     }
-    stayTree =()=>{
-        if(this.state.change){
-            this.setState({ change : false });
-        }else{
-            this.setState({ change : true});
-        }
+    componentDidMount(){
+        fetch("./flare.json")
+        .then( resp => {
+            return resp.json();
+        })
+        .then(data =>{
+            this.setState({treeData : data , isLoading : false});
+        });
     }
     showTree =()=>{
         if(this.state.change){
@@ -25,16 +29,15 @@ class App extends Component {
     render(){
         const divStyle={ 
             padding : "10px",
-            display : "block" 
+            display : "block",
         };
         const div1Style = {
             textAlign:"center",
-            width : "25%",
-            float : "left",
+            width : "100%",
             boxSizing : "border-box"
         };
         const btnStyle = {
-            width : "90%",
+            width : "30%",
             height:"40px",
             backgroundColor : "lightblue",
             cursor : "pointer",
@@ -45,16 +48,21 @@ class App extends Component {
         }else{ 
             divStyle.display = "none";
         }
+        if(this.state.isLoading){
+            console.log("THIS IS LOADING");
+            return <p>Loading..</p>
+          }
         return(
             <div>
             <div style={div1Style}>
                 <button style={btnStyle}onMouseOver={this.showTree}>
                 Drop Down</button>
+                
             </div>
-            <div onMouseLeave={this.showTree} style={divStyle}>
-                <Dtree />
+            <div style={divStyle}>
+            <Tree data={this.state.treeData}/>
             </div>
-            </div>
+           </div>
         );
     }
 }
