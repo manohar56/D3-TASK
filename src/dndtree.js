@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import * as d3 from "d3";
 import "./App.css";
 import "./d3-context-menu.css";
+import "./Tooltip.css";
   
 let d3Tree ={}; 
 var maxLabelLength = 20; 
@@ -19,6 +20,11 @@ var selectedNode = null;
 var draggingNode = null;
 var dragStarted = null; 
 var domNode;
+
+    //DIV FOR TOOLTIPS
+    var div = d3.select("body").append("div")	
+    .attr("class", "tooltip")				
+    .style("opacity", 0);
 
 function generateUUID(){
     var d = new Date().getTime();
@@ -85,7 +91,10 @@ d3Tree.updateNode = function(state){
         {
                 title: 'Rename node',
                 action: function(elm, d, i) {
-                        console.log('Rename node');
+                        console.log('Rename node');    //DIV FOR TOOLTIPS
+                        var div = d3.select("body").append("div")	
+                        .attr("class", "tooltip")				
+                        .style("opacity", 0);
                         state.handleEditModal(d);
                 }
         },
@@ -390,6 +399,20 @@ node = svgGroup.selectAll("g.node")
 
     // Add a context menu
     node.on('contextmenu', d3.contextMenu(menu));
+    
+    node.on("mouseover", function(d) {		
+        div.transition()		
+            .duration(200)		
+            .style("opacity", .9);		
+        div	.html( d.name + "<br/>"  + d.id +"<br/>" +d.parent.name)	
+            .style("left", (d3.event.pageX) + "px")		
+            .style("top", (d3.event.pageY - 28) + "px");	
+        })					
+    .on("mouseout", function(d) {		
+        div.transition()		
+            .duration(500)		
+            .style("opacity", 0);	
+    });
 
 
     // Transition nodes to their new position.
