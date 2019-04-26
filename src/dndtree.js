@@ -404,7 +404,7 @@ node = svgGroup.selectAll("g.node")
         div.transition()		
             .duration(200)		
             .style("opacity", .9);		
-        div	.html( d.name + "<br/>"  + d.id +"<br/>" +d.parent.name)	
+        div	.html( d.name + "<br/>"  + d.id )	
             .style("left", (d3.event.pageX) + "px")		
             .style("top", (d3.event.pageY - 28) + "px");	
         })					
@@ -560,25 +560,31 @@ diagonal = d3.svg.diagonal()
         this.setState({value : "" , editNode : false});
     }
     submitAddnode =()=>{
+        const newNode = this.state.node;
         if(this.state.node && this.state.addNode){
             if(this.state.node._children !==null){
                 this.state.node.children= this.state.node._children;
                 this.state.node._children = null;
             }
-            if(this.state.node.children === null){
-                this.state.node.children = [];
+            if(newNode.count === null){
+                newNode.children = [];
+                newNode.count =2;
             }
         }
         nodeName = document.getElementById("txt1").value;
         const id = generateUUID();
-        this.state.node.children.push({ 'name': nodeName, 
+        newNode.children.push(
+        { 
+        'name': nodeName, 
         'id' :  id,
-        'depth': this.state.node.depth + 1,                           
-        'children': [], 
-        '_children':null 
+        'count' : null,
+        'depth': newNode.depth + 1,
+        'children' : [],
+        '_children' : null
         });
-        update(this.state.node);
+        update(newNode);
         this.setState({value : "" , addNode : false});
+        console.log(newNode.children);
     }
     closeAddnode =()=>{
         this.setState({value : "" , addNode : false});
