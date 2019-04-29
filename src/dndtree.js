@@ -597,7 +597,7 @@ diagonal = d3.svg.diagonal()
     d3Tree.showTree(
         {
           width: "100%",
-          height: "300px"
+          height: "400px"
         },
         this.getChartState()
         );

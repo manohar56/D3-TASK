@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Tree from "./dndtree";
-import Treelist from "./Treelist";
 
 class App extends Component {
     constructor(){
@@ -8,7 +7,6 @@ class App extends Component {
         this.state ={
             treeData :[],
             change : false,
-            name : "Change To Tree",
             isLoading :true
         };
     }
@@ -24,10 +22,8 @@ class App extends Component {
     showTree =()=>{
         if(this.state.change){
             this.setState({ change : false });
-            this.setState({ name :"Change To Tree"});
         }else{
             this.setState({ change : true});
-            this.setState({ name :"Change To Directory"});
         }
     }
     render(){
@@ -40,11 +36,6 @@ class App extends Component {
             width : "100%",
             boxSizing : "border-box"
         };
-        const listStyle = {
-            paddingLeft : "100px",
-            backgroundColor : "wheat",
-            display : "block"
-        };
         const btnStyle = {
             width : "30%",
             height:"40px",
@@ -54,10 +45,8 @@ class App extends Component {
         };
         if(this.state.change){
             divStyle.display = "block";
-            listStyle.display = "none";
         }else{ 
             divStyle.display = "none";
-            listStyle.display = "block";
         }
         if(this.state.isLoading){
             console.log("THIS IS LOADING");
@@ -67,12 +56,9 @@ class App extends Component {
             <div>
             <div style={div1Style}>
                 <button style={btnStyle}onMouseOver={this.showTree}>
-                {this.state.name}</button>
+                Drop Down</button>
                 
             </div>
-            <div style={listStyle}>
-            <Treelist data={this.state.treeData}/>
-            </div >
             <div style={divStyle}>
             <Tree data={this.state.treeData}/>
             </div>
