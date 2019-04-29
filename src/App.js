@@ -7,6 +7,7 @@ class App extends Component {
         super();
         this.state ={
             treeData :[],
+            listData : [],
             change : false,
             name : "Change To Tree",
             isLoading :true
@@ -18,7 +19,7 @@ class App extends Component {
             return resp.json();
         })
         .then(data =>{
-            this.setState({treeData : data , isLoading : false});
+            this.setState({treeData : data , isLoading : false, listData : data});
         });
     }
     showTree =()=>{
@@ -41,7 +42,7 @@ class App extends Component {
             boxSizing : "border-box"
         };
         const listStyle = {
-            paddingLeft : "100px",
+            paddingLeft : "10px",
             backgroundColor : "wheat",
             display : "block"
         };
@@ -74,7 +75,7 @@ class App extends Component {
             <Treelist data={this.state.treeData}/>
             </div >
             <div style={divStyle}>
-            <Tree data={this.state.treeData}/>
+           
             </div>
            </div>
         );

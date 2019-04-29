@@ -82,6 +82,7 @@ function toggleChildren(d) {
     } else if (d._children) {
         d.children = d._children;
         d._children = null;
+        console.log("MUKESH", d.children);
     }
     update(d);
 }
@@ -114,8 +115,9 @@ function update(parent) {
                 //add text
         entered.append("span").attr("class", "filename")
                 .html(function (d) {
-                    return d.name; })
-                .style("background-color","yellow");
+                    console.log("MANOHAR",d.name);
+                    return d.name; });
+                //.style("background-color","yellow");
                 //update caret direction
         nodeEls.select("span").attr("class",            function (d) {
                     var icon = d.children ? " glyphicon-chevron-down"
@@ -125,9 +127,9 @@ function update(parent) {
        
                 //update position with transition
         nodeEls.transition().duration(duration)
-                .style("top", function (d) { 
-                return (d.y - tree.nodeHeight()) + "px";})
-                .style("left", function (d) { return 5*d.x +"px"; })
+                .style("top", function(d){
+                    return d.y-tree.nodeHeight()+"px";})
+                .style("left", d=> 2*d.x +"px" )
                 .style("opacity", 1);
                 
         nodeEls.exit().remove();
@@ -165,7 +167,7 @@ class Treelist extends Component {
     }
     render(){
         return(
-            <div id="dtree" style ={{height : "400px", backgroundColor : "wheat", overflow: "scroll"}}></div>
+            <div id="dtree" style ={{height : "400px", backgroundColor : "wheat", overflow: "scroll",position :"relative"}}></div>
         );
     }
 }

@@ -2,9 +2,9 @@
   color: orange;
 }
 li {
+  position : absolute;
   list-style: none;
   cursor: pointer;
-  width: 300px;
 }
 .txt {
   background-color: yellowgreen;
