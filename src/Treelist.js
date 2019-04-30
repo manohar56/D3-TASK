@@ -156,7 +156,7 @@ class Treelist extends Component {
     }
     render(){
         return(
-            <div id="dtree" style ={{height : "400px", backgroundColor : "wheat", overflow: "scroll",position :"relative"}}></div>
+            <div id="dtree" style ={{height : "400px", overflow: "scroll",position :"relative", width :"50%"}}></div>
         );
     }
 }

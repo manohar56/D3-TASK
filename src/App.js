@@ -43,7 +43,6 @@ class App extends Component {
         };
         const listStyle = {
             paddingLeft : "10px",
-            backgroundColor : "wheat",
             display : "block"
         };
         const btnStyle = {
