@@ -1,18 +1,47 @@
-
+@import url('//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css');
 .selected{
   color: orange;
 }
 li {
-  position : absolute;
+  position: absolute;
   list-style: none;
   cursor: pointer;
 }
+.txt {
+  background-color: yellowgreen;
+}
 span {
-  margin-right: 3px;
-  padding : 3px;
-  font-size: 18px;
+  margin: 2px;
+  font-size : 18px
 }
 
 .caret {
   font-size: 10px;
 }
+.glyphicon {
+  margin: 2px;
+}
+
+  .up {
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+    transform: rotate(-135deg);
+  }
+  
+  .glyphicon-chevron-down {
+    font-size: 18px;  
+  }
+  .glyphicon-chevron-right {
+    
+    font-size: 18px;  
+  }
+  .glyphicon-folder-close{
+    color: blueviolet;
+    font-size: 18px;  
+  }
+  .glyphicon-file {
+    color: blueviolet;
+    font-size: 18px;  
+  }

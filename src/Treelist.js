@@ -1,7 +1,6 @@
 import React , { Component } from "react";
 import * as d3 from "d3";
 import "./icon.css";
-import "./phicons.css";
 
 let D3treelist = {};
 d3.layout.treelist = function () {
@@ -26,13 +25,7 @@ d3.layout.treelist = function () {
                     });
                 }
             }
-
-            /**
-             visit all nodes in the tree and set the x, y positions
-            */
-            function layout(node) {
-                //all children of the same parent are rendered on the same  x level
-                //y increases every time a child is added to the list 
+            function layout(node) { 
                 var x = 0, y = 0;
                 visit(function (n, index, parent) {
                     x = parent ? parent.x + childIndent : 0;
@@ -107,17 +100,18 @@ d3.json("flare.json", function (err, data) {
             .on("mouseout", function (d) {
                         d3.selectAll(".selected").classed("selected", false);
                     });
-                //add arrows if it is a folder
-        entered.append("span").attr("class",           function(d) {
-            var icon = d.children || d._children ? "glyphicon-folder-close" :  "glyphicon-file";
-                return "glyphicon" +icon;
+                
+                //add icons for folder for file
+        entered.append("span").attr("class", function (d) {
+                    var icon = d.children || d._children ? "glyphicon-folder-close"
+                        : "glyphicon-file";
+                    return "glyphicon " + icon;
                 });
                 //add text
-        entered.append("span").attr("class",        "filename")
-                .html(function (d) {
-                    return d.name; });
-               // .style("background-color","yellow");
-       //update position with transition
+        entered.append("span").attr("class",                    "filename")
+                    .html(function (d) { return d.name; });
+                //update caret directio
+              //update position with transition
         nodeEls.transition().duration(duration)
                 .style("top", function (d) { 
                 return (d.y - tree.nodeHeight()) + "px";})
@@ -136,7 +130,6 @@ d3.json("flare.json", function (err, data) {
         update(root);
     };
 });
-
 class Treelist extends Component {
     constructor(props){
         super(props);
@@ -149,7 +142,7 @@ class Treelist extends Component {
     }
     render(){
         return(
-            <div id="dtree" style ={{height : "400px", overflow: "scroll",position :"relative", width :"50%"}}></div>
+            <div id="dtree" style ={{height : "400px", overflow: "scroll", position: "relative"}}></div>
         );
     }
 }
