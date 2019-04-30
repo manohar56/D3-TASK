@@ -72,10 +72,10 @@ class App extends Component {
                 
             </div>
             <div style={listStyle}>
-            <Treelist data={this.state.treeData}/>
+                <Treelist />
             </div >
             <div style={divStyle}>
-           
+                <Tree data={this.state.treeData}/>
             </div>
            </div>
         );

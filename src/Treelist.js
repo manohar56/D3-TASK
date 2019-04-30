@@ -72,29 +72,29 @@ d3.layout.treelist = function () {
 
         return treelist;
 };
-var tree , ul , root;
-var id = 0,duration = 250;
+d3.json("flare.json", function (err, data) {
+    var tree , ul , root;
+    var id = 0,duration = 250;
 
-function toggleChildren(d) {
-    if (d.children) {
-        d._children = d.children;
-        d.children = null;
-    } else if (d._children) {
-        d.children = d._children;
-        d._children = null;
-        console.log("MUKESH", d.children);
+    function toggleChildren(d) {
+        if (d.children) {
+            d._children = d.children;
+            d.children = null;
+    }   else if (d._children) {
+            d.children = d._children;
+            d._children = null;
+        }
+        update(d);
     }
-    update(d);
-}
-function update(parent) {
-    var nodes = tree.nodes(root);
-    var nodeEls = ul.selectAll("li").data(nodes, function (d) {
+    function update(parent) {
+        var nodes = tree.nodes(root);
+        var nodeEls = ul.selectAll("li").data(nodes, function (d) {
                 //d.id = d.id || ++id;
                 return d.id ||(d.id = ++id);
             })
             //.attr("position", "absolute")
                 //entered nodes
-    var entered = nodeEls.enter().append("li")
+        var entered = nodeEls.enter().append("li")
             .style("top", parent.y +"px")
             .style("opacity", 0)
             .style("height", tree.nodeHeight() + "px")
@@ -113,11 +113,10 @@ function update(parent) {
                 return icon;
                 });
                 //add text
-        entered.append("span").attr("class", "filename")
+        entered.append("span").attr("class",        "filename")
                 .html(function (d) {
-                    console.log("MANOHAR",d.name);
                     return d.name; });
-                //.style("background-color","yellow");
+               // .style("background-color","yellow");
                 //update caret direction
         nodeEls.select("span").attr("class",            function (d) {
                     var icon = d.children ? " glyphicon-chevron-down"
@@ -127,23 +126,23 @@ function update(parent) {
        
                 //update position with transition
         nodeEls.transition().duration(duration)
-                .style("top", function(d){
-                    return d.y-tree.nodeHeight()+"px";})
-                .style("left", d=> 2*d.x +"px" )
+                .style("top", function (d) { 
+                return (d.y - tree.nodeHeight()) + "px";})
+                .style("left", function (d) { return 5*d.x +"px"; })
                 .style("opacity", 1);
                 
         nodeEls.exit().remove();
-}
+    }
 
-D3treelist.create= function(props, state){
-    var data = state.data;
-    tree = d3.layout.treelist()
-        .childIndent(10)
-        .nodeHeight(30);
-    ul = d3.select("#dtree").append("ul");
-    root = data[0];
-    update(root);
-};
+    D3treelist.create= function(){
+        tree = d3.layout.treelist()
+            .childIndent(10)
+            .nodeHeight(30);
+        ul = d3.select("#dtree").append("ul");
+        root = data[0];
+        update(root);
+    };
+});
 
 class Treelist extends Component {
     constructor(props){
@@ -153,17 +152,7 @@ class Treelist extends Component {
         };
     }
     componentDidMount(){
-        D3treelist.create({
-            width :"100%",
-            height : "350px"
-        },
-        this.getChartState()
-        );
-    }
-    getChartState(){
-        return{
-            data : this.props.data
-        };
+        D3treelist.create();
     }
     render(){
         return(
