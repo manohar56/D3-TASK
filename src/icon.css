@@ -1,3 +1,4 @@
+
 .selected{
   color: orange;
 }
@@ -6,45 +7,12 @@ li {
   list-style: none;
   cursor: pointer;
 }
-.txt {
-  background-color: yellowgreen;
-}
 span {
   margin-right: 3px;
   padding : 3px;
+  font-size: 18px;
 }
 
 .caret {
   font-size: 10px;
 }
-.glyphicon-chevron-right {
-    border: solid black;
-    border-width: 0 3px 3px 0;
-    display: inline-block;
-    padding: 3px;
-    transform: rotate(-45deg);
-  }
-  
-  .glyphicon-chevron-left {
-    border: solid black;
-    border-width: 0 3px 3px 0;
-    display: inline-block;
-    padding: 3px;
-    transform: rotate(135deg);
-  }
-  
-  .glyphicon-chevron-up {
-    border: solid black;
-    border-width: 0 3px 3px 0;
-    display: inline-block;
-    padding: 3px;
-    transform: rotate(-135deg);
-  }
-  
-  .glyphicon-chevron-down {
-    border: solid black;
-    border-width: 0 3px 3px 0;
-    display: inline-block;
-    padding: 3px;
-    transform: rotate(45deg);
-  }

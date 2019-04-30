@@ -1,6 +1,7 @@
 import React , { Component } from "react";
 import * as d3 from "d3";
 import "./icon.css";
+import "./phicons.css";
 
 let D3treelist = {};
 d3.layout.treelist = function () {
@@ -108,23 +109,15 @@ d3.json("flare.json", function (err, data) {
                     });
                 //add arrows if it is a folder
         entered.append("span").attr("class",           function(d) {
-             var icon = d.children ? " glyphicon-chevron-down"
-                : d._children ? "glyphicon-chevron-right" : "";
-                return icon;
+            var icon = d.children || d._children ? "glyphicon-folder-close" :  "glyphicon-file";
+                return "glyphicon" +icon;
                 });
                 //add text
         entered.append("span").attr("class",        "filename")
                 .html(function (d) {
                     return d.name; });
                // .style("background-color","yellow");
-                //update caret direction
-        nodeEls.select("span").attr("class",            function (d) {
-                    var icon = d.children ? " glyphicon-chevron-down"
-                        : d._children ? "glyphicon-chevron-right" : "";
-                    return icon;
-                });
-       
-                //update position with transition
+       //update position with transition
         nodeEls.transition().duration(duration)
                 .style("top", function (d) { 
                 return (d.y - tree.nodeHeight()) + "px";})
