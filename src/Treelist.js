@@ -128,7 +128,7 @@ d3.json("flare.json", function (err, data) {
         nodeEls.transition().duration(duration)
                 .style("top", function (d) { 
                 return (d.y - tree.nodeHeight()) + "px";})
-                .style("left", function (d) { return 5*d.x +"px"; })
+                .style("left", function (d) { return 2*d.x +"px"; })
                 .style("opacity", 1);
                 
         nodeEls.exit().remove();
