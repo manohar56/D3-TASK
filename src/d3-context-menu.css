@@ -14,16 +14,25 @@
 
 .d3-context-menu ul {
 	list-style-type: none;
+	background-color: lightskyblue;
 	margin: 4px 0px;
 	padding: 0px;
 	cursor: default;
 }
 
-.d3-context-menu ul li {
+.d3-context-menu ul {
+	padding: 1px 1px;
+}
+
+.d3-context-menu ul :hover {
+	background-color: #4677f8;
+	color: #fefefe;
+}
+p {
 	padding: 4px 16px;
 }
 
-.d3-context-menu ul li:hover {
+p :hover {
 	background-color: #4677f8;
 	color: #fefefe;
 }

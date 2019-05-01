@@ -45,8 +45,6 @@ function expand(d) {
 }
 //START CONTEXT MENU HERE
 d3.contextMenu = function (menu, openCallback) {
-
-	// create the div element that will hold the context menu
 	d3.selectAll('.d3-context-menu').data([1])
 		.enter()
 		.append('div')
@@ -62,7 +60,7 @@ d3.contextMenu = function (menu, openCallback) {
 		d3.selectAll('.d3-context-menu').html('');
 		var list = d3.selectAll('.d3-context-menu').append('ul');
 		list.selectAll('li').data(menu).enter()
-			.append('li')
+			.append('p')
 			.html(function(d) {
 				return d.title;
 			})
@@ -71,8 +69,6 @@ d3.contextMenu = function (menu, openCallback) {
 				d3.select('.d3-context-menu').style('display', 'none');
 			});
 
-		// the openCallback allows an action to fire before the menu is displayed
-		// an example usage would be closing a tooltip
 		if (openCallback) openCallback(data, index);
 
 		// display context menu
@@ -84,6 +80,9 @@ d3.contextMenu = function (menu, openCallback) {
 		d3.event.preventDefault();
 	};
 };
+var div = d3.select("body").append("div")	
+                        .attr("class", "tooltip")				
+                        .style("opacity", 0);
 var menu = [];
 var nodeName ="";
 d3Tree.updateNode = function(state){
@@ -91,11 +90,8 @@ d3Tree.updateNode = function(state){
         {
                 title: 'Rename node',
                 action: function(elm, d, i) {
-                        console.log('Rename node');    //DIV FOR TOOLTIPS
-                        var div = d3.select("body").append("div")	
-                        .attr("class", "tooltip")				
-                        .style("opacity", 0);
-                        state.handleEditModal(d);
+                    console.log('Rename node');
+                    state.handleEditModal(d);
                 }
         },
         {
@@ -399,7 +395,7 @@ node = svgGroup.selectAll("g.node")
 
     // Add a context menu
     node.on('contextmenu', d3.contextMenu(menu));
-    
+    // TOOLTIPS DEFINATION
     node.on("mouseover", function(d) {		
         div.transition()		
             .duration(200)		

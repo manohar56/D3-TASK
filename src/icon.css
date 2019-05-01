@@ -7,9 +7,6 @@ li {
   list-style: none;
   cursor: pointer;
 }
-.txt {
-  background-color: yellowgreen;
-}
 span {
   margin: 2px;
   font-size : 18px
